@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.8](https://github.com/moq-dev/moq/compare/moq-net-v0.3.7...moq-net-v0.3.8) - 2026-09-29
+
+### Added
+
+- *(net)* BigInt-free varint codec, internal U64, and checked Varint.decode ([#4454](https://github.com/moq-dev/moq/pull/4454))
+- *(net)* drain queued stream data before a graceful close ([#4430](https://github.com/moq-dev/moq/pull/4430))
+- *(net)* read a subtree through an origin mount ([#4271](https://github.com/moq-dev/moq/pull/4271))
+
+### Fixed
+
+- *(net)* skip announce updates the peer cannot tell apart ([#4423](https://github.com/moq-dev/moq/pull/4423))
+- *(net)* an origin::Dynamic keeps its origin alive ([#4417](https://github.com/moq-dev/moq/pull/4417))
+- *(net)* resolve a relayed subscription's start from its source ([#4387](https://github.com/moq-dev/moq/pull/4387))
+- *(moq-net)* hide routes through a peer that withdrew the prefix ([#4399](https://github.com/moq-dev/moq/pull/4399))
+- *(net)* forget spliced tracks unread for the linger, finished ones included ([#4361](https://github.com/moq-dev/moq/pull/4361))
+- *(net)* select scoped routes after filtering, not before ([#4363](https://github.com/moq-dev/moq/pull/4363))
+- *(net)* refuse chained and wildcard origin mounts in any order ([#4362](https://github.com/moq-dev/moq/pull/4362))
+- *(net)* keep an aborted track's finished groups, expire ended tracks ([#4378](https://github.com/moq-dev/moq/pull/4378))
+- *(net)* keep a settled track's groups when it is aborted ([#4351](https://github.com/moq-dev/moq/pull/4351))
+
+### Other
+
+- *(quest)* drop suffix-based routing from the plans ([#4382](https://github.com/moq-dev/moq/pull/4382))
+
 ## [0.3.7](https://github.com/moq-dev/moq/compare/moq-net-v0.3.6...moq-net-v0.3.7) - 2026-09-27
 
 ### Added

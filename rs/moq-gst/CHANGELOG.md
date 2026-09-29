@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.9](https://github.com/moq-dev/moq/compare/moq-gst-v0.4.8...moq-gst-v0.4.9) - 2026-09-29
+
+### Fixed
+
+- *(moq-gst)* moqsrc waits for its session to end on stop ([#4416](https://github.com/moq-dev/moq/pull/4416))
+- *(gst)* keep waiting for a keyframe after a header-only buffer ([#4356](https://github.com/moq-dev/moq/pull/4356))
+
 ## [0.4.8](https://github.com/moq-dev/moq/compare/moq-gst-v0.4.7...moq-gst-v0.4.8) - 2026-09-27
 
 ### Other

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.8](https://github.com/moq-dev/moq/compare/moq-audio-v0.1.7...moq-audio-v0.1.8) - 2026-09-29
+
+### Other
+
+- compile the Windows, macOS, and OBS plugin code on every PR ([#4370](https://github.com/moq-dev/moq/pull/4370))
+
 ## [0.1.7](https://github.com/moq-dev/moq/compare/moq-audio-v0.1.6...moq-audio-v0.1.7) - 2026-09-27
 
 ### Other

@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.0](https://github.com/moq-dev/moq/compare/moq-relay-v0.15.8...moq-relay-v0.16.0) - 2026-09-29
+
+### Added
+
+- *(net)* read a subtree through an origin mount ([#4271](https://github.com/moq-dev/moq/pull/4271))
+
+### Fixed
+
+- *(sock)* resolve an ephemeral reuseport group's port with a plain bind ([#4409](https://github.com/moq-dev/moq/pull/4409))
+- *(auth)* make grant expiry exact, dropping the clock-skew grace ([#4368](https://github.com/moq-dev/moq/pull/4368))
+- *(cli)* refuse a client CA under --auth-public on a listener ([#4364](https://github.com/moq-dev/moq/pull/4364))
+- *(net)* refuse chained and wildcard origin mounts in any order ([#4362](https://github.com/moq-dev/moq/pull/4362))
+- *(auth)* [**breaking**] restore 0.14 auth parity ([#4319](https://github.com/moq-dev/moq/pull/4319))
+
+### Other
+
+- prove stopped relays and worker groups closed their sockets instead of racing a rebind ([#4408](https://github.com/moq-dev/moq/pull/4408))
+
 ## [0.15.8](https://github.com/moq-dev/moq/compare/moq-relay-v0.15.7...moq-relay-v0.15.8) - 2026-09-27
 
 ### Added

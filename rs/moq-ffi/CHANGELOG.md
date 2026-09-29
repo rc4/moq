@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.9](https://github.com/moq-dev/moq/compare/moq-ffi-v0.4.8...moq-ffi-v0.4.9) - 2026-09-29
+
+### Fixed
+
+- *(net)* an origin::Dynamic keeps its origin alive ([#4417](https://github.com/moq-dev/moq/pull/4417))
+
 ## [0.4.8](https://github.com/moq-dev/moq/compare/moq-ffi-v0.4.7...moq-ffi-v0.4.8) - 2026-09-27
 
 ### Added

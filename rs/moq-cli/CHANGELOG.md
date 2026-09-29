@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0](https://github.com/moq-dev/moq/compare/moq-cli-v0.12.8...moq-cli-v0.13.0) - 2026-09-29
+
+### Added
+
+- *(net)* drain queued stream data before a graceful close ([#4430](https://github.com/moq-dev/moq/pull/4430))
+
+### Fixed
+
+- *(cli)* refuse every MoQ-side flag a verb never reads ([#4419](https://github.com/moq-dev/moq/pull/4419))
+- *(cli)* refuse a client CA under --auth-public on a listener ([#4364](https://github.com/moq-dev/moq/pull/4364))
+- *(cli)* schedule play decode by the earliest owed picture ([#4374](https://github.com/moq-dev/moq/pull/4374))
+- *(auth)* [**breaking**] restore 0.14 auth parity ([#4319](https://github.com/moq-dev/moq/pull/4319))
+
 ## [0.12.8](https://github.com/moq-dev/moq/compare/moq-cli-v0.12.7...moq-cli-v0.12.8) - 2026-09-27
 
 ### Fixed
