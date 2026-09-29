@@ -727,7 +727,7 @@ impl Connection {
 	/// queued has been delivered.
 	///
 	/// See [`moq_net::Session::close`]: finished tracks deliver their last groups and
-	/// FIN first, bounded by a one second deadline. Call this before
+	/// FIN and announcements are withdrawn, bounded by a one second deadline. Call this before
 	/// [`Client::close`], which closes the transport without waiting. Returns `Ok`
 	/// when nothing was live, and the session's error if it did not drain.
 	pub async fn close(self) -> crate::Result<()> {
