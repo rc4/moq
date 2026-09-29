@@ -33,6 +33,10 @@ export type Clock = z.infer<typeof ClockSchema>;
  * The wall-clock time of `pts`, given in `ptsTimescale` units per second, under the broadcast's
  * fixed clock mapping (`wall + pts` after conversion into the clock's timescale).
  *
+ * A `Date` holds only whole milliseconds, so anything finer than that in the clock is truncated
+ * here. The Rust `Clock::wall_clock` keeps the catalog's full precision, so a sub-millisecond
+ * difference between the two sides is this platform limit, not a mismatch.
+ *
  * Throws on a zero timescale, a non-integer or unsafe value, or a result outside the JSON-safe
  * integer range, rather than truncating.
  */

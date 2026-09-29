@@ -61,7 +61,7 @@ impl Clock {
 		Ok(Self { wall })
 	}
 
-	/// The wall-clock time of `pts` under this fixed mapping.
+	/// The wall-clock time of `pts` under this fixed mapping, at the precision of the clock's timescale.
 	pub fn wall_clock(&self, pts: moq_net::Timestamp) -> Result<std::time::SystemTime> {
 		let scale = self.wall.scale();
 		let total = self.wall.value() as u128 + pts.as_scale(scale);
@@ -69,10 +69,15 @@ impl Clock {
 			return Err(crate::Error::InvalidWall(u64::try_from(total).unwrap_or(u64::MAX)));
 		}
 
-		let unix_millis = MOQ_EPOCH_UNIX_MILLIS as u128 + total * 1000 / scale.as_u64() as u128;
-		let unix_millis =
-			u64::try_from(unix_millis).map_err(|_| crate::Error::TimestampOverflow(moq_net::TimeOverflow))?;
-		Ok(std::time::UNIX_EPOCH + std::time::Duration::from_millis(unix_millis))
+		// Whole seconds plus a sub-second remainder keeps the clock's own precision, down to the
+		// nanoseconds a `SystemTime` holds, instead of truncating to milliseconds.
+		let scale = scale.as_u64() as u128;
+		let secs = (total / scale) as u64;
+		let nanos = ((total % scale) * 1_000_000_000 / scale) as u32;
+		let epoch = std::time::UNIX_EPOCH + std::time::Duration::from_millis(MOQ_EPOCH_UNIX_MILLIS);
+		epoch
+			.checked_add(std::time::Duration::new(secs, nanos))
+			.ok_or(crate::Error::TimestampOverflow(moq_net::TimeOverflow))
 	}
 }
 
@@ -139,6 +144,24 @@ mod test {
 		serde_json::from_str::<Clock>(r#"{"wall":9007199254740992}"#).expect_err("a wall past 2^53-1 must not decode");
 		let wall = moq_net::Timestamp::new(MAX_SAFE_INTEGER + 1, moq_net::Timescale::MICRO).unwrap();
 		assert!(Clock::new(wall).is_err());
+	}
+
+	#[test]
+	fn wall_clock_keeps_sub_millisecond_precision() {
+		let epoch = std::time::UNIX_EPOCH + std::time::Duration::from_millis(MOQ_EPOCH_UNIX_MILLIS);
+
+		// Microsecond and 48kHz clocks land between milliseconds.
+		let clock = Clock::new(moq_net::Timestamp::from_micros(1_000_123).unwrap()).unwrap();
+		assert_eq!(
+			clock.wall_clock(moq_net::Timestamp::from_micros(456).unwrap()).unwrap(),
+			epoch + std::time::Duration::from_micros(1_000_579)
+		);
+
+		let clock = Clock::new(moq_net::Timestamp::from_scale(1, 48_000).unwrap()).unwrap();
+		assert_eq!(
+			clock.wall_clock(moq_net::Timestamp::ZERO).unwrap(),
+			epoch + std::time::Duration::from_nanos(1_000_000_000 / 48_000)
+		);
 	}
 
 	#[test]
